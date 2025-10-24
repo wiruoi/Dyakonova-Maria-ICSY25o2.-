@@ -1,0 +1,57 @@
+ЗАДАНИЕ 1
+def get_last_letter(word):
+    word = word.lower()
+
+    exclude = ['ь', 'ъ', 'ы']
+    for ch in reversed(word):
+        if ch not in exclude:
+            return ch
+    return ''
+
+cities = input("Введите названия городов через пробел: ").split()
+
+flag = True 
+
+for i in range(len(cities) - 1):
+    last_letter = get_last_letter(cities[i])
+    first_letter = cities[i + 1][0].lower()
+    if last_letter != first_letter:
+        flag = False
+        break
+
+if flag:
+    print("ДА")
+else:
+    print("НЕТ")
+
+ЗАДАНИЕ 2
+
+items = [
+    ["карандаш", 20],
+    ["зеркальце", 100],
+    ["зонт", 500],
+    ["рубашка", 300],
+    ["молоток", 600],
+    ["пила", 400],
+    ["удочка", 1200]
+]
+
+items.sort(key=lambda x: x[1], reverse=True)
+
+
+N = int(input("Введите максимальный вес рюкзака (в граммах): "))
+
+current_weight = 0
+selected = []
+
+for item in reversed(items):  
+    if current_weight + item[1] <= N:
+        selected.append(item)
+        current_weight += item[1]
+
+print("\nВыбранные предметы:")
+for name, weight in selected:
+    print(f"{name} — {weight} г")
+
+print(f"Общий вес: {current_weight} г")
+print(f"Количество предметов: {len(selected)}")
